@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-header">
+    Consulta de Contatos
+  </div>
+  <div class="card-body">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <form #loginform="ngForm" >
+
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label"
+              >Nome</label
+            >
+            <div class="col-sm-10">
+              <input
+                #nomeConsult ="ngModel"
+                [(ngModel)]="_pessoaConsultModel.nome"
+                type="text"
+                class="form-control"
+                id="inputEmail3"
+                placeholder="Nome"
+                name="nome"
+              />
+            </div>
+          </div>
+      
+       
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button type="button" (click)="consultarPessoas()"  class="btn btn-primary">Consultar</button>
+              <button type="button" [routerLink]="['/contatos-crud', 0, 'Novo']"  class="btn btn-primary">Novo</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  </div>
+</div>
+
+<table class="table tabela-espac">
+  <thead class="thead-dark">
+    <tr>
+      
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefone</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let item of _pessoaConsultMod" > 
+        <td>
+          {{item.nome}}
+        </td>
+        <td>
+            {{item.email}}
+         </td>
+         <td>
+            {{item.telefone}}
+         </td>
+         <td>
+           <a [routerLink]="['/contatos-crud',item.id, 'Editar' ]" >
+            Editar
+           </a>
+         </td>
+         <td>
+            <a [routerLink]="['/contatos-crud',item.id , 'Excluir' ]" >
+             Excluir
+            </a>
+          </td>
+    </tr>
+      </tbody>
+</table>
+
+

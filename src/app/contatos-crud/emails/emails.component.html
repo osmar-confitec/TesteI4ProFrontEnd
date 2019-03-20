@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-header">
+     Email
+  </div>
+  <div class="card-body">
+   <!--  <button type="button" class="btn btn-primary" (click)="OpenModal(template)">
+      Incluir
+    </button> -->
+    <button type="button" class="btn btn-primary" (click)="Novo()">
+      Incluir Email
+    </button>
+  </div>
+</div>
+
+<table class="table tabela-espac">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Emails</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of emails">
+      <td>
+        {{ item.enderecoEmail }}
+      </td>
+
+      <td>
+          <a (click)="EditarEmail(item)">
+              Editar
+            </a>
+        <!-- <a [routerLink]="['/contatos-crud',item.id, 'Editar' ]" >
+            Editar
+           </a> -->
+      </td>
+      <td>
+        <a (click)="DeletarEmail(item.id)">
+          Excluir
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #template>
+  <div class="modal-header">
+  <!--   <h4 class="modal-title pull-left">Modal</h4> -->
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="emailForm" (ngSubmit)="Salvar()">
+      
+      <div class="form-group">
+        <label for="Email">Email</label>
+        <input
+          formControlName="email"
+          [(ngModel)]="emailRef.enderecoEmail"
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Email"
+        />
+
+        <div
+          *ngIf="
+          emailForm.get('email').invalid &&
+            (emailForm.get('email').dirty || emailForm.get('email').touched)
+          "
+          class="alert alert-danger"
+        >
+          Email inválido favor verificar
+        </div>
+      </div>
+      
+      <button
+        [disabled]="!emailForm.valid"
+        type="submit"
+       
+        class="btn btn-success"
+      >
+        <span >
+          Salvar
+        </span>
+       
+      </button>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,103 @@
+<div class="card">
+    <div class="card-header">
+       Telefone
+    </div>
+    <div class="card-body">
+     <!--  <button type="button" class="btn btn-primary" (click)="OpenModal(template)">
+        Incluir
+      </button> -->
+      <button type="button" class="btn btn-primary" (click)="Novo()">
+        Incluir Telefone
+      </button>
+    </div>
+  </div>
+
+
+<table class="table tabela-espac">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Telefones</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+  
+  
+  
+  
+      <tr *ngFor="let item of telefones" > 
+          <td>
+            {{item.numeroTelefone}}
+          </td>
+          
+          <td>
+              <a (click)="EditarTelefone(item)">
+                  Editar
+                </a>
+            <!-- <a [routerLink]="['/contatos-crud',item.id, 'Editar' ]" >
+                Editar
+               </a> -->
+          </td>
+           <td>
+             <a (click)="DeletarTelefone(item.id)" >
+               Excluir
+              </a> 
+            </td>
+      </tr>
+        </tbody>
+  </table>
+
+
+  <ng-template #templatetel>
+      <div class="modal-header">
+      <!--   <h4 class="modal-title pull-left">Modal</h4> -->
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="modalRef.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="telefoneForm" (ngSubmit)="Salvar()">
+          
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input
+              formControlName="telefone"
+              [(ngModel)]="telefoneRef.numeroTelefone"
+              type="text"
+              class="form-control"
+              id="telefone"
+              name="telefone"
+              placeholder="Telefone"
+            />
+    
+            <div
+              *ngIf="
+              telefoneForm.get('telefone').invalid &&
+                (telefoneForm.get('telefone').dirty || telefoneForm.get('telefone').touched)
+              "
+              class="alert alert-danger"
+            >
+              Telefone requerido
+            </div>
+          </div>
+          
+          <button
+            [disabled]="!telefoneForm.valid"
+            type="submit"
+           
+            class="btn btn-success"
+          >
+            <span >
+              Salvar
+            </span>
+           
+          </button>
+        </form>
+      </div>
+    </ng-template>
